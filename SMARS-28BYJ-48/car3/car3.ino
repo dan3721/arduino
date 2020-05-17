@@ -1,7 +1,7 @@
 /*
    5/12/2020
 
-   Car 3 is complete with two motors(left working in reverse) and non-blocking ultra sonic.
+   Car 3 runs forward till blocked.
 
    https://homediyelectronics.com/projects/arduino/arduinoprogramminghcsr04withinterrupts/?p=4
 */
@@ -14,10 +14,12 @@ const int DELAY = 100; // millis
 const int LIMIT = 3; // num inches
 
 const int STEPS_PER_REV = 2038;
-const int RPM = 6;
+const int RPM = 10;
 const int STEP = 1;
 
 /* 28BYJ-48 stepper motor. The ULN2003 driver to Arduino pin setup:
+
+  RIGHT
 
     INT1 -> 4
     INT2 -> 6 *
@@ -25,6 +27,8 @@ const int STEP = 1;
     INT4 -> 7
 
   note*: reverse AND need to setSpeed to negative!
+
+  LEFT
 
     INT1 -> 8
     INT2 -> 9
@@ -58,10 +62,10 @@ void loop() {
     rightStepper.step(STEP);
   }
 
-  //    Serial.println(distance);
-  //  running = distance > 3;
+  //  Serial.println(distance);
+  running = distance > 3;
   //  Serial.println(running ? "running" : "stopped");
-  delay(1);
+  //  delay(1);
 }
 
 long last;
